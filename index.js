@@ -38,34 +38,37 @@ const getText = document.querySelector("#text");
 const getPre = document.querySelector(".pre");
 const getNext = document.querySelector(".next");
 const getBtn = document.querySelector("#btn");
-
-let currentItem = 0;
+let currentItems = 0;
 
 window.addEventListener("DOMContentLoaded", () => {
-  onLoad();
-});
+  onLoading()
+})
 
-function onLoad() {
-  let item = reviews[currentItem];
-  getImage.src = item.img;
-  getName.textContent = item.name;
-  getRole.textContent = item.job;
-  getText.textContent = item.text;
+function onLoading() {
+  getImage.src = reviews[currentItems].img;
+  getName.textContent = reviews[currentItems].name;
+  getRole.textContent = reviews[currentItems].job;
+  getText.textContent = reviews[currentItems].text;
 }
 
 getNext.addEventListener("click", () => {
-  currentItem++;
-  if (currentItem > reviews.length - 1) {
-    currentItem = 0;
+  currentItems++;
+  if (currentItems > reviews.length - 1) {
+    currentItems = 0
   }
-  onLoad(currentItem);
-});
+  onLoading(currentItems)
 
+})
 getPre.addEventListener("click", () => {
-  currentItem--;
-  if (currentItem < 0) {
-    currentItem = reviews.length - 1;
+  currentItems--;
+  if (currentItems < 0) {
+    currentItems = reviews.length - 1
   }
-  onLoad();
-});
+  onLoading(currentItems)
 
+})
+
+getBtn.addEventListener("click", () => {
+  currentItems = Math.floor(Math.random() * reviews.length);
+  onLoading()
+})
